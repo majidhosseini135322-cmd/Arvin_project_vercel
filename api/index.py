@@ -9,10 +9,12 @@ Vercel هر فایل داخل api/ را یک Serverless Function می‌شناس
 import os
 import sys
 
-# main.py و ماژول‌های protocol/ pages/ central/ updater/ runtime در ریشه‌ی ریپو
-# هستند، ولی این فایل داخل api/ اجرا می‌شود؛ پس ریشه را به sys.path اضافه می‌کنیم.
+# ریشه پروژه (جایی که main.py است)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if ROOT not in sys.path:
-    sys.path.insert(0, ROOT)
+sys.path.insert(0, ROOT)
 
-from main import app  # noqa: E402,F401
+try:
+    from main import app
+except ImportError as e:
+    print(f"ERROR importing main: {e}", file=sys.stderr)
+    raise

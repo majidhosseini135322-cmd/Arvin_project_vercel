@@ -1,7 +1,19 @@
 import os
 import subprocess
 import sys
+import os
+from dotenv import load_dotenv
+from upstash_redis import Redis
 
+# ۱. بارگذاری متغیرهای محیطی (برای تست لوکال)
+load_dotenv()
+
+# ۲. مقداردهی اولية Redis
+redis = Redis.from_env()
+
+# نمونه استفاده:
+# ذخیره داده: redis.set("chat_id", "123456")
+# خواندن داده: data = redis.get("chat_id")
 _PACKAGES = [
     "fastapi==0.104.1",
     "uvicorn[standard]==0.24.0",

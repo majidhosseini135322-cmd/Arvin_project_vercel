@@ -9,8 +9,10 @@ from upstash_redis import Redis
 load_dotenv()
 
 # ۲. مقداردهی اولية Redis
-redis = Redis.from_env()
+redis = Redis(url="https://happy-feline-116800.upstash.io", token="gQAAAAAAAchAAAIgcDFkMzIxYjE1MGI1MDc0ZWM2ODIxNzljNzE4ZDFkYTAxZQ")
 
+redis.set("foo", "bar")
+value = redis.get("foo")
 # نمونه استفاده:
 # ذخیره داده: redis.set("chat_id", "123456")
 # خواندن داده: data = redis.get("chat_id")
